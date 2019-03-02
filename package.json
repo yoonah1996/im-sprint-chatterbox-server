@@ -8,29 +8,20 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "start": "FILL_ME_IN",
-    "test": "jest"
+    "start": "node server/basic-server.js",
+    "test": "node __test__/getReview && jest",
+    "test:circleci": "node __test__/getReview && jest --json --outputFile=.circleci/results.json"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "husky": "^1.3.1",
-    "mocha": "^2.4.5",
     "request": "^2.70.0",
-    "supertest": "^3.4.2"
+    "supertest": "^3.4.2",
+    "eslint": "^5.12.0",
+    "jest": "^24.1.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "eslint ./server",
-      "...": "..."
+      "pre-commit": "eslint ./server"
     }
-  },
-  "dependencies": {
-    "eslint": "^5.12.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "jest": "^24.1.0"
   }
 }
