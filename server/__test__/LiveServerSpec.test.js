@@ -16,23 +16,23 @@ describe('server', function() {
     return request(app)
       .get('/classes/messages')
       .then(res => {
-        const isParsable = function() {
+        const isParsable = function(string) {
           try {
-            JSON.parse(res.text);
+            JSON.parse(string);
             return true;
           } catch (e) {
             return false;
           }
         };
 
-        expect(isParsable(res.text)).toEqual(true);
+        expect(isParsable(res.body)).toEqual(true);
       });
   });
   test('should send back an object', function() {
     return request(app)
       .get('/classes/messages')
       .then(res => {
-        const parsedBody = JSON.parse(res.text);
+        const parsedBody = JSON.parse(res.body);
         expect(typeof parsedBody).toEqual('object');
       });
   });
@@ -40,7 +40,7 @@ describe('server', function() {
     return request(app)
       .get('/classes/messages')
       .then(res => {
-        const parsedBody = JSON.parse(res.text);
+        const parsedBody = JSON.parse(res.body);
         expect(typeof parsedBody).toEqual('object');
         expect(Array.isArray(parsedBody.results)).toEqual(true);
       });
@@ -51,7 +51,7 @@ describe('server', function() {
       .post('/classes/messages')
       .send({
         username: 'Jono',
-        message: 'Do my bidding!'
+        text: 'Do my bidding!'
       })
       .then(res => {
         expect(res.status).toEqual(201);
@@ -62,13 +62,13 @@ describe('server', function() {
       .post('/classes/messages')
       .send({
         username: 'Jono',
-        message: 'Do my bidding!'
+        text: 'Do my bidding!'
       })
       .then(() => {
         return request(app)
           .get('/classes/messages')
           .then(res => {
-            const messages = JSON.parse(res.text).results;
+            const messages = JSON.parse(res.body).results;
             expect(messages[0].username).toEqual('Jono');
             expect(messages[0].message).toEqual('Do my bidding!');
           });
