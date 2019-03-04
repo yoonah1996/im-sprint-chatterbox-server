@@ -70,7 +70,7 @@ describe('server', function() {
           .then(res => {
             const messages = JSON.parse(res.body).results;
             expect(messages[0].username).toEqual('Jono');
-            expect(messages[0].message).toEqual('Do my bidding!');
+            expect(messages[0].text).toEqual('Do my bidding!');
           });
       });
   });
