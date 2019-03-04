@@ -25,14 +25,14 @@ describe('server', function() {
           }
         };
 
-        expect(isParsable(res.body)).toEqual(true);
+        expect(isParsable(res.text)).toEqual(true);
       });
   });
   test('should send back an object', function() {
     return request(app)
       .get('/classes/messages')
       .then(res => {
-        const parsedBody = JSON.parse(res.body);
+        const parsedBody = JSON.parse(res.text);
         expect(typeof parsedBody).toEqual('object');
       });
   });
@@ -40,7 +40,7 @@ describe('server', function() {
     return request(app)
       .get('/classes/messages')
       .then(res => {
-        const parsedBody = JSON.parse(res.body);
+        const parsedBody = JSON.parse(res.text);
         expect(typeof parsedBody).toEqual('object');
         expect(Array.isArray(parsedBody.results)).toEqual(true);
       });
@@ -68,7 +68,7 @@ describe('server', function() {
         return request(app)
           .get('/classes/messages')
           .then(res => {
-            const messages = JSON.parse(res.body).results;
+            const messages = JSON.parse(res.text).results;
             expect(messages[0].username).toEqual('Jono');
             expect(messages[0].text).toEqual('Do my bidding!');
           });
