@@ -1,57 +1,41 @@
 /*************************************************************
 
-You should implement your request handler function in this file.
+request handler 함수를 여기서 작성합니다.
 
-requestHandler is already getting passed to http.createServer()
-in basic-server.js, but it won't work as is.
+reuqestHandler 함수는 이미 basic-server.js 파일에서 사용 했지만, 아직 작동하지 않습니다.
 
-You'll have to figure out a way to export this function from
-this file and include it in basic-server.js so that it actually works.
-
-*Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
+requestHandler 함수를 export 하여 basic-server.js 에서 사용 할 수 있게 하세요
 
 **************************************************************/
 
-var requestHandler = function (request, response) {
-  // Request and Response come from node's http module.
-  //
-  // They include information about both the incoming request, such as
-  // headers and URL, and about the outgoing response, such as its status
-  // and content.
-  //
-  // Documentation for both request and response can be found in the HTTP section at
-  // http://nodejs.org/documentation/api/
+const requestHandler = function(request, response) {
+  // node server 의 requestHandler는 항상 request, response를 인자로 받습니다.
 
-  // Do some basic logging.
+  // 또한 http 요청은 항상 요청과 응답이 동반 되어야 합니다.
   //
-  // Adding more logging to your server can be an easy way to get passive
-  // debugging help, but you should always be careful about leaving stray
-  // console.logs in your code.
-  console.log('Serving request type ' + request.method + ' for url ' + request.url);
-
-  // The outgoing status.
-  var statusCode = 200;
-
-  // See the note below about CORS headers.
-  var headers = defaultCorsHeaders;
-
-  // Tell the client we are sending them plain text.
+  // 이것들은 요청에 대한 정보를 담고 있습니다. 예를들면, 요청 url과 method 등을 담고 있습니다.
   //
-  // You will need to change this if you are sending something
-  // other than plain text, like JSON or HTML.
+  // 기본적인 로그를 작성 하세요
+  //
+  // 간단한 로그를 작성 하는 것은, 서버를 디버깅 하는데 매우 수월하게 해줍니다.
+  // 아래는 모든 리퀘스트의 메소드와 url을 로깅 해줍니다.
+  console.log(
+    'Serving request type ' + request.method + ' for url ' + request.url
+  );
+
+  // 응답을 위한 status 코드입니다.
+  const statusCode = 200;
+
+  // 기본 CORS 설정이 되어있는 코드 입니다. 아래에 있습니다.
+  // CORS에 대해서는 조금더 알아보세요.
+  const headers = defaultCorsHeaders;
+  // 응답 헤더에 응답하는 컨텐츠의 자료 타입을 헤더에 기록 합니다.
   headers['Content-Type'] = 'text/plain';
 
-  // .writeHead() writes to the request line and headers of the response,
-  // which includes the status and all headers.
+  // .writeHead() 메소드는 응답 헤더에 해당 key, value 를 적어줍니다.
   response.writeHead(statusCode, headers);
 
-  // Make sure to always call response.end() - Node may not send
-  // anything back to the client until you do. The string you pass to
-  // response.end() will be the body of the response - i.e. what shows
-  // up in the browser.
-  //
-  // Calling .end "flushes" the response's internal buffer, forcing
-  // node to actually send all the data over to the client.
+  // 노드 서버에 대한 모든 요청은 응답이 있어야 합니다. response.end 메소드는 요청에 대한 응답을 보내줍니다.
   response.end('Hello, World!');
 };
 
@@ -64,7 +48,7 @@ var requestHandler = function (request, response) {
 //
 // Another way to get around this restriction is to serve you chat
 // client from this domain by setting up static file serving.
-var defaultCorsHeaders = {
+const defaultCorsHeaders = {
   'access-control-allow-origin': '*',
   'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'access-control-allow-headers': 'content-type, accept',
