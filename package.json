@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/basic-server.js",
     "test": "node __test__/getReview && jest",
-    "test:circleci": "node __test__/getReview && jest --json --outputFile=.circleci/results.json"
+    "test:circleci": "node __test__/getReview && jest --json --outputFile=.circleci/results.json --detectOpenHandles"
   },
   "devDependencies": {
     "husky": "^1.3.1",

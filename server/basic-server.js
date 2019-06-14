@@ -21,9 +21,9 @@ const ip = '127.0.0.1';
 //
 //서버를 만든 후 우리는 어떤 IP 와 포트 에서 listen 할 것인지 지정 해 주어야 합니다.
 // request에 대한 처리는 './request-handler.js'에 있는 모듈에서 처리하게 될 것입니다.
-// 현재 handleRequest는 정의 되어 있지 않습니다. request-handler.js 에서 해당 모듈을 불러오세요.
+// 현재 requestHandler 정의 되어 있지 않습니다. request-handler.js 에서 해당 모듈을 불러오세요.
 
-const server = http.createServer(handleRequest);
+const server = http.createServer(requestHandler);
 console.log('Listening on http://' + ip + ':' + port);
 server.listen(port, ip);
 
@@ -35,3 +35,4 @@ server.listen(port, ip);
 //
 // server.listen() 은 node 서버가 계속해서 돌게끔 프로세스를 유지합니다.
 // 프로세스를 종료 하기 위해서는 control + c 를 누르세요.
+module.exports = server;
