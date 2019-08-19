@@ -6,21 +6,14 @@ class MyCustomReporter {
       this._options = options;
     }
   
-    onRunComplete(contexts, results) {
-    //   console.log('Custom reporter output:');
-    //   console.log('GlobalConfig: ', this._globalConfig);
-    //   console.log('Options: ', this._options);
-    }
-
-    onTestResult(test, testResult, aggregateResult) {
-        console.log('test reuslt');
-        // console.log(testResult)
-        const { numFailingTests, numPassingTests } = testResult;
-        const result = {
-            passed: numPassingTests,
-            failed: numFailingTests
+    onRunComplete(contexts, result) {
+        // console.log('result', result);
+        const { numFailedTests, numPassedTests } = result;
+        const parsedResult = {
+            passed: numPassedTests,
+            failed: numFailedTests
         }
-        fs.writeFile('result.json', JSON.stringify(result), (err) => {
+        fs.writeFile('result.json', JSON.stringify(parsedResult), (err) => {
             return new Error(err);
         })
     }
