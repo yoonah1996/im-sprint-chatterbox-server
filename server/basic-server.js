@@ -1,5 +1,5 @@
 /* node 의 모듈들을 불러옵니다. */
-const http = require('http');
+const http = require("http");
 
 // 모든 서버는 요청을 받을수 있는 포트 번호를 필요로 합니다.
 
@@ -13,7 +13,7 @@ const port = 3000;
 // 아마 지금 개발 서버를 켠다면 본인의 로컬 머신에서 구동 중 일겁니다.따라서 기본적인 IP adress 는 127.0.0.1 입니다.
 // 로컬 서버 ip인 127.0.0.1은 localhost라는 이름으로 대체 될 수 있습니다.
 
-const ip = '127.0.0.1';
+const ip = "127.0.0.1";
 
 // 서버를 열기 위해 nodejs 의 http 모듈을 사용할 것 입니다.
 
@@ -24,7 +24,7 @@ const ip = '127.0.0.1';
 // 현재 requestHandler 정의 되어 있지 않습니다. request-handler.js 에서 해당 모듈을 불러오세요.
 
 const server = http.createServer(requestHandler);
-console.log('Listening on http://' + ip + ':' + port);
+console.log("Listening on http://" + ip + ":" + port);
 server.listen(port, ip);
 
 // 서버를 시작하기 위해서는 command line에 `node server/basic-server.js` 를 입력하세요.

@@ -20,7 +20,7 @@ const requestHandler = function(request, response) {
   // 간단한 로그를 작성 하는 것은, 서버를 디버깅 하는데 매우 수월하게 해줍니다.
   // 아래는 모든 리퀘스트의 메소드와 url을 로깅 해줍니다.
   console.log(
-    'Serving request type ' + request.method + ' for url ' + request.url
+    "Serving request type " + request.method + " for url " + request.url
   );
 
   // 응답을 위한 status 코드입니다.
@@ -30,13 +30,13 @@ const requestHandler = function(request, response) {
   // CORS에 대해서는 조금더 알아보세요.
   const headers = defaultCorsHeaders;
   // 응답 헤더에 응답하는 컨텐츠의 자료 타입을 헤더에 기록 합니다.
-  headers['Content-Type'] = 'text/plain';
+  headers["Content-Type"] = "text/plain";
 
   // .writeHead() 메소드는 응답 헤더에 해당 key, value 를 적어줍니다.
   response.writeHead(statusCode, headers);
 
   // 노드 서버에 대한 모든 요청은 응답이 있어야 합니다. response.end 메소드는 요청에 대한 응답을 보내줍니다.
-  response.end('Hello, World!');
+  response.end("Hello, World!");
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -49,8 +49,8 @@ const requestHandler = function(request, response) {
 // Another way to get around this restriction is to serve you chat
 // client from this domain by setting up static file serving.
 const defaultCorsHeaders = {
-  'access-control-allow-origin': '*',
-  'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'access-control-allow-headers': 'content-type, accept',
-  'access-control-max-age': 10 // Seconds.
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "access-control-allow-headers": "content-type, accept",
+  "access-control-max-age": 10 // Seconds.
 };
