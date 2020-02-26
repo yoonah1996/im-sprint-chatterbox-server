@@ -1,15 +1,6 @@
 const { exec } = require("child_process");
 const https = require("https");
-const {
-  URCLASS_URL,
-  URCLASS_KEY,
-  ASSESSMENT_ID,
-  TRAVIS_PULL_REQUEST_SLUG
-} = process.env;
-
-if (URCLASS_KEY === "\n") {
-  throw new Error("urclass key is missing");
-}
+const { URCLASS_URL, ASSESSMENT_ID, TRAVIS_PULL_REQUEST_SLUG } = process.env;
 
 if (TRAVIS_PULL_REQUEST_SLUG === "\n") {
   throw new Error("github username is missing");
@@ -21,21 +12,20 @@ exec("jest --json", (err, json, stderr) => {
 
   const options = {
     hostname: URCLASS_URL,
-    path: `/user_assessment/${ASSESSMENT_ID}`,
+    path: `/Prod/submit/`,
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "x-api-key": URCLASS_KEY
+      "Content-Type": "application/json"
     }
   };
 
   console.log(JSON.stringify(options));
-  console.log(username);
   console.log(result);
-  return;
+
   const body = {
-    isPassed: result.numTotalTests === result.numPassedTests,
-    githubUsername: username
+    assessment_id: ASSESSMENT_ID,
+    githubUsername: username,
+    result: result
   };
 
   makeRequest(options, body);
