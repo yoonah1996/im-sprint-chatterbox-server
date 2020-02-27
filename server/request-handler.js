@@ -19,9 +19,9 @@ const requestHandler = function(request, response) {
   //
   // 간단한 로그를 작성 하는 것은, 서버를 디버깅 하는데 매우 수월하게 해줍니다.
   // 아래는 모든 리퀘스트의 메소드와 url을 로깅 해줍니다.
-  console.log(
-    "Serving request type " + request.method + " for url " + request.url
-  );
+  // console.log(
+  //   "Serving request type " + request.method + " for url " + request.url
+  // );
 
   // 응답을 위한 status 코드입니다.
   const statusCode = 200;
@@ -54,3 +54,6 @@ const defaultCorsHeaders = {
   "access-control-allow-headers": "content-type, accept",
   "access-control-max-age": 10 // Seconds.
 };
+
+
+module.exports =requestHandler;
