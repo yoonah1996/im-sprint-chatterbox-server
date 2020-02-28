@@ -33,10 +33,10 @@ const requestHandler = function (request, response) {
   const headers = defaultCorsHeaders;
   headers["Content-Type"] = "text/plain";
   // 응답 헤더에 응답하는 컨텐츠의 자료 타입을 헤더에 기록 합니다.
-
+console.log("dkaspdkapsfksapfksapfkaspfkafkpfkpsafkapskf",request.url)
   if (request.method === 'OPTIONS' && request.url === "/classes/messages") {
 
-    response.writeHead(201, headers);
+    response.writeHead(200, headers);
     response.end("this is options");
   }
 
@@ -62,7 +62,7 @@ const requestHandler = function (request, response) {
         response.writeHead(201, headers);
         response.end(JSON.stringify(result.results))
         
-        
+        console.log(result.results)
         
        
         
@@ -70,7 +70,7 @@ const requestHandler = function (request, response) {
       })
   } else if (request.method === 'GET' && request.url === "/classes/messages") {
     response.writeHead(statusCode, headers)
-    response.end(JSON.stringify(result.results))
+    response.end(JSON.stringify(result))
     
   }
   else {
