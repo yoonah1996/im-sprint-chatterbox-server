@@ -32,7 +32,7 @@ describe("server", function() {
     return request(app)
       .get("/classes/messages")
       .then(res => {
-        const parsedBody = JSON.parse(res.text);
+        const parsedBody = JSON.parse(res.text);        
         expect(typeof parsedBody).toEqual("object");
         done();
       });
@@ -41,9 +41,10 @@ describe("server", function() {
     return request(app)
       .get("/classes/messages")
       .then(res => {
-        const parsedBody = JSON.parse(res.text);
+        const parsedBody = JSON.parse(res.text);//=res.text === results
         expect(typeof parsedBody).toEqual("object");
         expect(Array.isArray(parsedBody.results)).toEqual(true);
+ 
         done();
       });
   });
