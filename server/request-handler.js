@@ -33,7 +33,7 @@ const requestHandler = function (request, response) {
   const headers = defaultCorsHeaders;
   headers["Content-Type"] = "text/plain";
   // 응답 헤더에 응답하는 컨텐츠의 자료 타입을 헤더에 기록 합니다.
-console.log("dkaspdkapsfksapfksapfkaspfkafkpfkpsafkapskf",request.url)
+
   if (request.method === 'OPTIONS' && request.url === "/classes/messages") {
 
     response.writeHead(200, headers);
@@ -62,7 +62,7 @@ console.log("dkaspdkapsfksapfksapfkaspfkafkpfkpsafkapskf",request.url)
         response.writeHead(201, headers);
         response.end(JSON.stringify(result.results))
         
-        console.log(result.results)
+  
         
        
         
