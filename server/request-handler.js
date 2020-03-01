@@ -20,9 +20,8 @@ requestHandler 함수를 export 하여 basic-server.js 에서 사용 할 수 있
 //     ✕ Should 404 when asked for a nonexistent endpoint (6ms)
 
 
-const result = {
- results: [{id:0,username:'codestates',text:'hello world', roomname : "codestates"} ]
-};
+const result = [{id:0,username:'codestates',text:'hello world', roomname : "codestates"} ];
+
 const requestHandler = function (request, response) {
   // node server 의 requestHandler는 항상 request, response를 인자로 받습니다.
   // let headers = defaultCorsHeader;
@@ -38,13 +37,7 @@ const requestHandler = function (request, response) {
 
     response.writeHead(201, headers);
     response.end("this is options");
-  }
-
-
-
-
-
-  if (request.method === 'POST' && request.url === "/classes/messages") {
+  }else if (request.method === 'POST' && request.url === "/classes/messages") {
     let body = [];
     request
       .on("data", chunk => {
@@ -52,25 +45,17 @@ const requestHandler = function (request, response) {
       })
       .on("end", () => {
 
-      
         body = JSON.parse(Buffer.concat(body).toString());
-    
-        body.id = result.results.length
-        
-        result.results.unshift(body)
+        body.id = result.length
+        result.unshift(body)
         // console.log(body.text)
         response.writeHead(201, headers);
-        response.end(JSON.stringify(result.results))
+        response.end(JSON.stringify(result))
         
-        
-        
-       
-        
-
       })
   } else if (request.method === 'GET' && request.url === "/classes/messages") {
     response.writeHead(statusCode, headers)
-    response.end(JSON.stringify(result.results))
+    response.end(JSON.stringify({results:result}))
     
   }
   else {
