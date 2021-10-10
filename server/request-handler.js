@@ -35,7 +35,7 @@ const requestHandler = function (request, response) {
 
   if (request.method === 'OPTIONS' && request.url === "/classes/messages") {
 
-    response.writeHead(201, headers);
+    response.writeHead(200, headers);
     response.end("this is options");
   }else if (request.method === 'POST' && request.url === "/classes/messages") {
     let body = [];
@@ -48,14 +48,15 @@ const requestHandler = function (request, response) {
         body = JSON.parse(Buffer.concat(body).toString());
         body.id = result.length
         result.unshift(body)
-        // console.log(body.text)
+        console.log(result)
         response.writeHead(201, headers);
         response.end(JSON.stringify(result))
-        
+
       })
   } else if (request.method === 'GET' && request.url === "/classes/messages") {
+    console.log(JSON.stringify(result))
     response.writeHead(statusCode, headers)
-    response.end(JSON.stringify({results:result}))
+    response.end(JSON.stringify(result))
     
   }
   else {
